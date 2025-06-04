@@ -72,6 +72,7 @@ export default function CardContainer() {
 
 function Card(props) {
   const { title, description, date, imageUrl: src, tags, archived } = props.card
+
   return (
     <div className="card">
       <img className="card-image" src={src} alt="" />
