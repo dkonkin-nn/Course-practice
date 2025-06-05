@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./index.css";
 
 //Rus
@@ -60,29 +61,41 @@ const tabData = [
 ];
 
 export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
+
+  function toggleActiveTab(tab) {
+    setActiveTab(tab);
+  }
+
+  function toggleOpen() {
+    setIsOpen((open) => !open)
+  }
+
   return (
     <>
-      {/*<button >Start</button>*/}
+      {!isOpen ? <button onClick={toggleOpen}>Start</button > :
+        <>
+          <div className="app">
+            <span onClick={toggleOpen} className="close">&times;</span>
+            <h1>State Tabs Card Display</h1>
 
-      <div className="app">
-        <span className="close">&times;</span>
-        <h1>State Tabs Card Display</h1>
+            <div className="tab-buttons">
+              <button onClick={() => toggleActiveTab(0)} className={`tab-button  ${activeTab == 0 && 'active'}`}>Tab 1</button>
+              <button onClick={() => toggleActiveTab(1)} className={`tab-button  ${activeTab == 1 && 'active'}`}>Tab 2</button>
+              <button onClick={() => toggleActiveTab(2)} className={`tab-button  ${activeTab == 2 && 'active'}`}>Tab 3</button>
+            </div>
 
-        <div className="tab-buttons">
-          <button className="tab-button  active">Tab 1</button>
-          <button className="tab-button">Tab 2</button>
-          <button className="tab-button">Tab 3</button>
-        </div>
+            <CardContainer cards={tabData[activeTab]} />
 
-        <CardContainer cards={tabData[0]} />
+            <div className="navigation-buttons">
+              <button onClick={() => (activeTab >= 1 && setActiveTab(prev => prev - 1))}>&lt; Previous</button>
+              <button onClick={() => (activeTab < 2 && setActiveTab(next => next + 1))}>Next &gt;</button>
+            </div>
 
-        <div className="navigation-buttons">
-          <button>&lt; Previous</button>
-          <button>Next &gt;</button>
-        </div>
-
-        <Footer />
-      </div>
+            <Footer />
+          </div>
+        </>}
     </>
   );
 }
