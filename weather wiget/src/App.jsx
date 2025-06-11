@@ -13,7 +13,7 @@ function App() {
     async function getData() {
       setLoading(true);
       try {
-        const res = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${city}`);
+        const res = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${city}&days=5`);
         const data = await res.json();
 
         if (data.error) {
@@ -57,7 +57,43 @@ function App() {
                 <p>Ветер: {weatherData?.current.wind_kph} km/h</p>
               </div>
             </div>}
+      </div>
+      {loading ?
+        <p>Загрузка...</p>
+        : error ?
+          <p>{error} </p>
+          : weatherData && <Forecast forecast={weatherData.forecast} />}
+    </div>
+  );
+}
 
+function Forecast({ forecast }) {
+
+  console.log(forecast);
+
+  return (
+    <div className="widget-container-forecast">
+      {forecast.forecastday.map((forecast, index) => <ForecastCard forecast={forecast} key={index} />)}
+    </div>);
+}
+
+function ForecastCard({ forecast }) {
+
+  const day = forecast.day;
+
+  return (
+    <div className="weather-card-forecast">
+      <h4>{new Date(forecast.date).toLocaleDateString()}</h4>
+      <img src={day.condition.icon} alt="icon" className="weather-icon" />
+      <div className="temperatures">
+        <p className="temperature">Мин: {Math.round(day.mintemp_c)}°C</p>
+        <p className="temperature">Макс: {Math.round(day.maxtemp_c)}°C</p>
+      </div>
+
+      <p className="condition">{day.condition.text}</p>
+      <div className="weather-details">
+        <p>Средняя влажность: {day.avghumidity}%</p>
+        <p>Скорость ветра до: {day.maxwind_kph} km/h</p>
       </div>
     </div>
   );

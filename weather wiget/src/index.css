@@ -27,10 +27,11 @@ p {
   width: 90%;
   padding: 20px;
   border-radius: 15px;
-  background: linear-gradient(135deg, #849abe, #214176); /* Градиентный фон */
+  background: linear-gradient(135deg, #849abe, #214176); /*Градиентный фон*/
   box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5); /* Мягкая тень */
   backdrop-filter: blur(12px); /* Эффект размытия */
   border: 1px solid rgba(255, 255, 255, 0.1); /* Лёгкая граница */
+  margin: auto;
 }
 
 /* Заголовок */
@@ -107,4 +108,45 @@ p {
   color: #cbd5e0; /* Мягкий серый */
   margin-top: 8px; /* Уменьшен отступ */
   line-height: 1.4; /* Снижен межстрочный интервал */
+}
+
+.widget-container-forecast {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 5px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #849abe, #214176); /*Градиентный фон*/
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.5); /* Мягкая тень */
+  backdrop-filter: blur(12px); /* Эффект размытия */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Лёгкая граница */
+}
+
+.temperatures {
+  display: flex;
+  gap: 10px;
+}
+
+.weather-card-forecast {
+  /* background: linear-gradient(135deg, #98aacb, #103d89); Градиентный фон */
+  padding: 15px; /* Снижены внутренние отступы */
+  border-radius: 10px;
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); Мягкая тень */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Полупрозрачная граница */
+  text-align: center;
+}
+
+.temperatures .temperature {
+  font-size: 1rem; /* Уменьшен размер текста */
+  color: #63b3ed; /* Голубой акцент */
+  margin: 8px 0; /* Уменьшен отступ */
+  font-weight: bold;
+}
+
+.weather-card-forecast .weather-icon {
+  width: 40px; /* Уменьшен размер иконки */
+  height: 40px;
 }
